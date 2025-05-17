@@ -4,6 +4,9 @@
 #include "parser.h"
 #include "semantic.h"
 #include "ir.h"
+#include "optimizer.h"
+#include "codegen.h"  // Include the header for code generation
+
 #define MAX_CODE_SIZE 10000
 
 int main()
@@ -35,5 +38,11 @@ int main()
     printf("Semantic check complete: All variables and returns are valid\n");
 
     generateIR(tokens, tokenCount);
+
+    optimizeIR("ir.txt", "ir_optimized.txt");
+    printf("Optimization complete: ir_optimized.txt\n");
+
+    generateCode("ir_optimized.txt", "output.asm");
+    printf("Code generation complete: output.asm\n");
     return 0;
 }
