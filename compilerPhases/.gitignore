@@ -1,0 +1,5 @@
+# Ignore the compiler folder
+compiler/
+
+# Ignore the compiler.exe file
+compiler.exe
