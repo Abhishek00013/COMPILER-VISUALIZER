@@ -9,15 +9,17 @@ int main() {
     c = a + b * 2;
     d = c / 2;
 
-    if (d > 5) {
+    if (d > 5) 
+    {
         d = d - 1;
-    } else {
+    }
+    else 
+    {
         d = d + 1;
     }
     while (d < 20)
     {
         d = d + 1;
     }
-
     return d;
 }
