@@ -230,8 +230,8 @@ int program()
     int node = newNode("program");
     addEdge(node, func_def_list());
 
-    // if (peek().type != TOKEN_EOF)
-    //     syntaxError("Expected EOF");
+    if (peek().type != TOKEN_EOF)
+        syntaxError("Expected EOF");
 
     return node;
 }

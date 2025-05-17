@@ -113,6 +113,4 @@ void checkSemantics(Token tokens[], int count)
         printf("Semantic Error: No return statement in main()\n");
         exit(1);
     }
-
-    printf("Semantic analysis passed: All variables and returns are valid\n");
 }

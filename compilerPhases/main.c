@@ -32,7 +32,7 @@ int main()
     printf("Parsing complete\n");
 
     checkSemantics(tokens, tokenCount); // semantic analysis
-    printf("Semantic check complete\n");
+    printf("Semantic check complete: All variables and returns are valid\n");
 
     generateIR(tokens, tokenCount);
     return 0;
