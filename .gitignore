@@ -1,5 +1,5 @@
 # Ignore the compiler folder
-compiler/
+compilerPhases/compiler
 
 # Ignore the compiler.exe file
-compiler.exe
+compilerPhases/compiler.exe

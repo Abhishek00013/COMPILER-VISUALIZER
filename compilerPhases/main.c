@@ -5,7 +5,7 @@
 #include "semantic.h"
 #include "ir.h"
 #include "optimizer.h"
-#include "codegen.h"  // Include the header for code generation
+#include "codegen.h" // Include the header for code generation
 
 #define MAX_CODE_SIZE 10000
 
@@ -22,7 +22,7 @@ int main()
 
     char code[MAX_CODE_SIZE];
     size_t bytesRead = fread(code, 1, MAX_CODE_SIZE - 1, file);
-    code[bytesRead] = '\0'; // 🛠️ Important fix here
+    code[bytesRead] = '\0';
     fclose(file);
 
     printf("Code from input.txt:\n%s\n", code);
