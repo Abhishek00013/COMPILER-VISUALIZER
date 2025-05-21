@@ -5,7 +5,7 @@
 #include "semantic.h"
 #include "ir.h"
 #include "optimizer.h"
-#include "codegen.h" // Include the header for code generation
+#include "codegen.h"
 
 #define MAX_CODE_SIZE 10000
 

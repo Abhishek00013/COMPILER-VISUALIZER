@@ -1,0 +1,26 @@
+program         → func_def_list
+
+func_def_list   → func_def func_def_list
+                | ε
+
+func_def        → 'int' IDENTIFIER '(' ')' block
+
+block           → '{' decl_list stmt_list '}'
+
+decl_list       → decl decl_list
+                | ε
+
+decl            → 'int' IDENTIFIER ';'
+
+stmt_list       → stmt stmt_list
+                | ε
+
+stmt            → IDENTIFIER '=' expr ';'
+                | 'return' expr ';'
+                | 'if' '(' expr ')' block else_part
+                | 'while' '(' expr ')' block
+
+else_part       → 'else' block
+                | ε
+
+expr            → (IDENTIFIER | NUMBER) (OPERATOR expr)?

@@ -1,18 +1,19 @@
 a = 4
-b = 3
-t0 = a + b
-t1 = t0 * 2
-c = t1
-t2 = c / 2
-d = t2
+t0 = 7
+b = t0
+t1 = a + b
+t2 = t1 * 2
+c = t2
+t3 = c / 2
+d = t3
 if d > 5 goto L0
 goto L1
 L0:
 d = d - 1
 goto L2
 L1:
-t3 = d + 1
-d = t3
+t4 = d + 1
+d = t4
 L2:
 if d < 20 goto L3
 goto L4

@@ -15,13 +15,6 @@ int isKeyword(const char *str)
     return 0;
 }
 
-void addToken(TokenType type, const char *value)
-{
-    tokens[tokenCount].type = type;
-    strcpy(tokens[tokenCount].value, value);
-    tokenCount++;
-}
-
 void addTokenWithLine(TokenType type, const char *value, int line)
 {
     tokens[tokenCount].type = type;

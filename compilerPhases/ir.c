@@ -5,14 +5,12 @@
 int labelCount = 0;
 int tempVarCount = 0;
 
-// Generate a new label
 const char *newLabel(char *buffer)
 {
     sprintf(buffer, "L%d", labelCount++);
     return buffer;
 }
 
-// Generate a new temporary variable
 const char *newTempVar(char *buffer)
 {
     sprintf(buffer, "t%d", tempVarCount++);
@@ -34,7 +32,7 @@ void generateIR(Token tokens[], int count)
 
     while (i < count)
     {
-        // Skip declarations like: int a;
+        // int a;
         if (tokens[i].type == TOKEN_KEYWORD && strcmp(tokens[i].value, "int") == 0 &&
             tokens[i + 1].type == TOKEN_IDENTIFIER &&
             tokens[i + 2].type == TOKEN_SEMICOLON)
@@ -42,15 +40,14 @@ void generateIR(Token tokens[], int count)
             i += 3;
         }
 
-        // Handle assignments: a = b + c + d;
+        // like: a = b + c + d;
         else if (tokens[i].type == TOKEN_IDENTIFIER &&
                  tokens[i + 1].type == TOKEN_ASSIGN)
         {
             char lhs[64], op1[64], op2[64], operator[4];
             strcpy(lhs, tokens[i].value);
-            i += 2; // Skip 'a' and '='
+            i += 2;
 
-            // Handle complex expressions
             strcpy(op1, tokens[i].value);
             i++;
 
@@ -61,23 +58,21 @@ void generateIR(Token tokens[], int count)
                 strcpy(op2, tokens[i].value);
                 i++;
 
-                // Generate a temporary variable for intermediate results
+                // temporary variable for intermediate results
                 const char *tempVar = newTempVar(tempVarBuffer);
                 fprintf(out, "%s = %s %s %s\n", tempVar, op1, operator, op2);
                 strcpy(op1, tempVar); // Use the result as the next operand
             }
 
-            // Final assignment to the left-hand side
+            // assign to the left-hand side
             fprintf(out, "%s = %s\n", lhs, op1);
 
-            // Ensure we skip the semicolon
             if (tokens[i].type == TOKEN_SEMICOLON)
             {
                 i++;
             }
         }
 
-        // Handle if condition
         else if (tokens[i].type == TOKEN_KEYWORD && strcmp(tokens[i].value, "if") == 0)
         {
             char Ltrue[10], Lfalse[10];
@@ -98,13 +93,11 @@ void generateIR(Token tokens[], int count)
                 fprintf(out, "%s:\n", ifBlockLabel);
                 i += 6;
 
-                // Parse if block
                 if (tokens[i].type == TOKEN_LBRACE)
                 {
                     i++;
                     while (tokens[i].type != TOKEN_RBRACE && i < count)
                     {
-                        // Recursively handle statements inside the block
                         if (tokens[i].type == TOKEN_IDENTIFIER &&
                             tokens[i + 1].type == TOKEN_ASSIGN &&
                             (tokens[i + 2].type == TOKEN_IDENTIFIER || tokens[i + 2].type == TOKEN_NUMBER))
@@ -137,7 +130,7 @@ void generateIR(Token tokens[], int count)
                             i++;
                         }
                     }
-                    i++; // skip }
+                    i++;
                 }
                 // Suppose ifBlockLabel contains "L0"
                 char nextLabel[10];
@@ -152,7 +145,6 @@ void generateIR(Token tokens[], int count)
             }
         }
 
-        // Handle while loop
         else if (tokens[i].type == TOKEN_KEYWORD && strcmp(tokens[i].value, "while") == 0)
         {
             char Lbegin[10], Lbody[10], Lend[10];
@@ -162,7 +154,6 @@ void generateIR(Token tokens[], int count)
 
             fprintf(out, "%s:\n", Lbegin);
 
-            // Parse while condition
             if (tokens[i + 1].type == TOKEN_LPAREN &&
                 (tokens[i + 2].type == TOKEN_IDENTIFIER || tokens[i + 2].type == TOKEN_NUMBER) &&
                 tokens[i + 3].type == TOKEN_OPERATOR &&
@@ -180,7 +171,6 @@ void generateIR(Token tokens[], int count)
                     i++;
                     while (tokens[i].type != TOKEN_RBRACE && i < count)
                     {
-                        // Recursively handle statements inside the block
                         if (tokens[i].type == TOKEN_IDENTIFIER &&
                             tokens[i + 1].type == TOKEN_ASSIGN &&
                             (tokens[i + 2].type == TOKEN_IDENTIFIER || tokens[i + 2].type == TOKEN_NUMBER))
@@ -213,7 +203,7 @@ void generateIR(Token tokens[], int count)
                             i++;
                         }
                     }
-                    i++; // skip }
+                    i++;
                 }
 
                 fprintf(out, "goto %s\n", Lbegin);
@@ -221,7 +211,6 @@ void generateIR(Token tokens[], int count)
             }
         }
 
-        // Handle return statement
         else if (tokens[i].type == TOKEN_KEYWORD && strcmp(tokens[i].value, "return") == 0 &&
                  (tokens[i + 1].type == TOKEN_IDENTIFIER || tokens[i + 1].type == TOKEN_NUMBER))
         {

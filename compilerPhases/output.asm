@@ -1,17 +1,18 @@
 .section .data
 a: .long 0
 4: .long 0
-b: .long 0
-3: .long 0
 t0: .long 0
+7: .long 0
+b: .long 0
 t1: .long 0
+t2: .long 0
 2: .long 0
 c: .long 0
-t2: .long 0
+t3: .long 0
 d: .long 0
 5: .long 0
 1: .long 0
-t3: .long 0
+t4: .long 0
 20: .long 0
 
 .section .text
@@ -20,21 +21,24 @@ _start:
     # a = 4
     movl $4, %eax
     movl %eax, a
-    # b = 3
-    movl $3, %eax
+    # t0 = 7
+    movl $7, %eax
+    movl %eax, t0
+    # b = t0
+    movl t0, %eax
     movl %eax, b
-    # t0 = a + b
+    # t1 = a + b
     movl a, %eax
     addl b, %eax
-    movl %eax, t0
-    # t1 = t0 * 2
-    movl t0, %eax
-    imull $2, %eax
     movl %eax, t1
-    # c = t1
+    # t2 = t1 * 2
     movl t1, %eax
+    imull $2, %eax
+    movl %eax, t2
+    # c = t2
+    movl t2, %eax
     movl %eax, c
-    # t2 = c / 2
+    # t3 = c / 2
     movl c, %eax
     movl %eax, %ebx
     movl $2, %ecx
@@ -42,9 +46,9 @@ _start:
     idivl %ecx
     movl %eax, %ebx
     movl %ebx, %eax
-    movl %eax, t2
-    # d = t2
-    movl t2, %eax
+    movl %eax, t3
+    # d = t3
+    movl t3, %eax
     movl %eax, d
     # if d > 5 goto L0
     movl d, %eax
@@ -60,12 +64,12 @@ L0:
  # goto L2
  jmp L2
 L1:
-    # t3 = d + 1
+    # t4 = d + 1
     movl d, %eax
     addl $1, %eax
-    movl %eax, t3
-    # d = t3
-    movl t3, %eax
+    movl %eax, t4
+    # d = t4
+    movl t4, %eax
     movl %eax, d
 L2:
     # if d < 20 goto L3
