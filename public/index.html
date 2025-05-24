@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mini Compiler</title>
+  <style>
+    body {
+      margin: 20px auto;
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      color: #222;
+      max-width: 900px;
+      padding: 0 15px;
+    }
+    textarea {
+      font-size: 14px;
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      font-family: monospace;
+      resize: vertical;
+    }
+    button {
+      margin-top: 10px;
+      padding: 8px 18px;
+      font-size: 15px;
+      background-color: #3a8f3a;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    button:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+    pre {
+      background: #fff;
+      padding: 8px;
+      border: 1px solid #bbb;
+      white-space: pre-wrap;
+      max-height: 280px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      border-radius: 3px;
+    }
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 3px;
+      font-weight: 600;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+    #outputContainer {
+      margin-top: 30px;
+    }
+    #treeOutput {
+      display: block;
+      max-width: 100%;
+      max-height: 280px;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      margin-bottom: 20px;
+      background: #fff;
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter your code:</h2>
+  <label for="codeInput">Your source code:</label>
+  <textarea id="codeInput" rows="20" cols="80" placeholder="Type or paste your code here..."></textarea><br />
+  <button id="compileBtn" onclick="compileCode()">Compile and Run</button>
+
+  <div id="outputContainer" aria-live="polite">
+    <h2>Compiler Outputs:</h2>
+
+    <h3>Tokens (tokens.txt):</h3>
+    <pre id="tokensOutput">No output yet.</pre>
+
+    <h3>Parse Tree (tree.png):</h3>
+    <!-- Changed from <pre> to <img> -->
+    <img id="treeOutput" alt="Parse Tree Image" src="" />
+
+    <h3>Intermediate Representation (ir.txt):</h3>
+    <pre id="irOutput">No output yet.</pre>
+
+    <h3>Optimized IR (ir_optimized.txt):</h3>
+    <pre id="irOptimizedOutput">No output yet.</pre>
+
+    <h3>Final Assembly (output.asm):</h3>
+    <pre id="asmOutput">No output yet.</pre>
+  </div>
+
+  <footer>Mini Compiler Visualizer &copy; 2025</footer>
+
+  <script>
+    async function compileCode() {
+      const compileBtn = document.getElementById("compileBtn");
+      compileBtn.disabled = true;
+
+      const code = document.getElementById("codeInput").value;
+
+      const outputTokens = document.getElementById("tokensOutput");
+      const outputTree = document.getElementById("treeOutput");
+      const outputIR = document.getElementById("irOutput");
+      const outputIROpt = document.getElementById("irOptimizedOutput");
+      const outputASM = document.getElementById("asmOutput");
+
+      outputTokens.textContent = "Loading...";
+      outputTree.src = "";
+      outputTree.alt = "Loading parse tree image...";
+      outputIR.textContent = "Loading...";
+      outputIROpt.textContent = "Loading...";
+      outputASM.textContent = "Loading...";
+
+      try {
+        const res = await fetch("http://localhost:3001/compile", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code }),
+        });
+
+        if (!res.ok) {
+          const errText = await res.text();
+          outputTokens.textContent = `❌ Error:\n${errText}`;
+          outputTree.alt = `❌ Error loading parse tree image`;
+          outputTree.src = "";
+          outputIR.textContent = `❌ Error:\n${errText}`;
+          outputIROpt.textContent = `❌ Error:\n${errText}`;
+          outputASM.textContent = `❌ Error:\n${errText}`;
+          compileBtn.disabled = false;
+          return;
+        }
+
+        const data = await res.json();
+
+        outputTokens.textContent = data.tokens || "(No tokens output)";
+        
+        if (data.tree) {
+          // data.tree contains base64 PNG data e.g. "data:image/png;base64,....."
+          outputTree.src = data.tree;
+          outputTree.alt = "Parse Tree Image";
+        } else {
+          outputTree.src = "";
+          outputTree.alt = "No parse tree image available";
+        }
+
+        outputIR.textContent = data.ir || "(No IR output)";
+        outputIROpt.textContent = data.irOptimized || "(No optimized IR output)";
+        outputASM.textContent = data.asm || "(No assembly output)";
+      } catch (err) {
+        const errorMsg = `❌ Network or unexpected error:\n${err.message}`;
+        outputTokens.textContent = errorMsg;
+        outputTree.alt = errorMsg;
+        outputTree.src = "";
+        outputIR.textContent = errorMsg;
+        outputIROpt.textContent = errorMsg;
+        outputASM.textContent = errorMsg;
+      } finally {
+        compileBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
