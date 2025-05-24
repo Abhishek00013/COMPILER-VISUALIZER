@@ -1,8 +1,34 @@
 # Ignore the compiler folder
 compilerPhases/compiler
 
-# Ignore the compiler.exe file
+# Ignore the compiler executable files
 compilerPhases/compiler.exe
+compilerPhases/compiler.out
 
+# Node.js dependencies
 node_modules/
 Backend/node_modules/
+Frontend/node_modules/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Build output
+dist/
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+.idea/
+*.iml
+
+# Environment variables
+.env
+.env.local
+.env.*.local
