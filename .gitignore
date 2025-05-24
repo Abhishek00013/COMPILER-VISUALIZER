@@ -3,3 +3,6 @@ compilerPhases/compiler
 
 # Ignore the compiler.exe file
 compilerPhases/compiler.exe
+
+node_modules/
+Backend/node_modules/
