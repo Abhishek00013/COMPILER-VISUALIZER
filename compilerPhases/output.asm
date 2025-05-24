@@ -1,92 +1,67 @@
 .section .data
-a: .long 0
-4: .long 0
-t0: .long 0
-7: .long 0
-b: .long 0
-t1: .long 0
-t2: .long 0
-2: .long 0
-c: .long 0
-t3: .long 0
-d: .long 0
+x: .long 0
+10: .long 0
+y: .long 0
 5: .long 0
-1: .long 0
-t4: .long 0
+t0: .long 0
+z: .long 0
+t1: .long 0
 20: .long 0
+2: .long 0
 
 .section .text
 .global _start
 _start:
-    # a = 4
-    movl $4, %eax
-    movl %eax, a
-    # t0 = 7
-    movl $7, %eax
+    # x = 10
+    movl $10, %eax
+    movl %eax, x
+    # y = 5
+    movl $5, %eax
+    movl %eax, y
+    # t0 = x - y
+    movl x, %eax
+    subl y, %eax
     movl %eax, t0
-    # b = t0
+    # z = t0
     movl t0, %eax
-    movl %eax, b
-    # t1 = a + b
-    movl a, %eax
-    addl b, %eax
-    movl %eax, t1
-    # t2 = t1 * 2
-    movl t1, %eax
-    imull $2, %eax
-    movl %eax, t2
-    # c = t2
-    movl t2, %eax
-    movl %eax, c
-    # t3 = c / 2
-    movl c, %eax
-    movl %eax, %ebx
-    movl $2, %ecx
-    xorl %edx, %edx
-    idivl %ecx
-    movl %eax, %ebx
-    movl %ebx, %eax
-    movl %eax, t3
-    # d = t3
-    movl t3, %eax
-    movl %eax, d
-    # if d > 5 goto L0
-    movl d, %eax
-    cmpl 5, %eax
-    jg L0
+    movl %eax, z
+    # if z < 10 goto L0
+    movl z, %eax
+    cmpl 10, %eax
+    jl L0
  # goto L1
  jmp L1
 L0:
-    # d = d - 1
-    movl d, %eax
-    subl $1, %eax
-    movl %eax, d
+    # z = z + 5
+    movl z, %eax
+    addl $5, %eax
+    movl %eax, z
  # goto L2
  jmp L2
 L1:
-    # t4 = d + 1
-    movl d, %eax
-    addl $1, %eax
-    movl %eax, t4
-    # d = t4
-    movl t4, %eax
-    movl %eax, d
+    # t1 = z - 5
+    movl z, %eax
+    subl $5, %eax
+    movl %eax, t1
+    # z = t1
+    movl t1, %eax
+    movl %eax, z
 L2:
-    # if d < 20 goto L3
-    movl d, %eax
+    # if z < 20 goto L3
+    movl z, %eax
     cmpl 20, %eax
     jl L3
  # goto L4
  jmp L4
 L3:
-    # d = d + 1
-    movl d, %eax
-    addl $1, %eax
-    movl %eax, d
+    # z = z + 2
+    movl z, %eax
+    addl $2, %eax
+    movl %eax, z
  # goto L2
  jmp L2
 L4:
-    # return d
-    movl d, %eax
+    # return z
+    movl z, %eax
     movl $1, %ebx
     int $0x80

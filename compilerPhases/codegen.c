@@ -264,9 +264,9 @@ void generateCode(const char *inputFile, const char *outputAsmFile)
     fclose(asmFile);
     printf("Assembly code generated: %s\n", outputAsmFile);
 
-    // Free allocated memory for lines
-    for (int i = 0; i < lineCount; i++)
-    {
-        free(lines[i]);
-    }
+// Free allocated memory for lines
+for (int i = 0; i < lineCount; i++) {
+    free(lines[i]);
 }
+}
+

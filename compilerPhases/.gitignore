@@ -1,0 +1,6 @@
+compilerPhases/compiler.exe
+compilerPhases/*.txt
+compilerPhases/*.asm
+compilerPhases/*.txt
+compilerPhases/*.asm
+Backend/node_modules/
