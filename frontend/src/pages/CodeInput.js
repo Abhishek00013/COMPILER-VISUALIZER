@@ -12,7 +12,7 @@ const CodeInput = ({ onVisualize }) => {
     extensions: [javascript()],
     theme: oneDark,
     value: code,
-    height: "400px",
+    height: "1500px",
     onChange: (value) => {
       setCode(value);
     },
