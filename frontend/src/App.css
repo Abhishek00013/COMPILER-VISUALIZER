@@ -6,7 +6,9 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+body {
+  background-color: rgb(156, 192, 212) !important;
+}
 .navbar {
   background-color: rgb(31, 79, 107) !important;
   padding: 1rem 0 !important;
@@ -90,4 +92,27 @@
   to {
     transform: rotate(360deg);
   }
+}
+.navigation-buttons {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 16px !important;
+  margin-top: 20px !important;
+}
+
+.navigation-buttons button {
+  width: 120px !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  border: 2px solid #0d6efd !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+  color: black !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.navigation-buttons button:hover {
+  background-color: #0d6efd !important;
 }
