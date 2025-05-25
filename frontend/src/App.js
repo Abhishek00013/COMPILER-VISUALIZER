@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 import CodeInput from "./pages/CodeInput";
 import CompilerPhases from "./pages/CompilerPhases";
 import AboutUS from "./pages/AboutUS";
-
+import "./App.css";
 function App() {
   const [outputs, setOutputs] = useState([]);
   const navigate = useNavigate();
