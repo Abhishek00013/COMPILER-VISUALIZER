@@ -5,6 +5,7 @@ import { oneDark } from "@codemirror/theme-one-dark";
 
 const CodeInput = ({ onVisualize }) => {
   const [code, setCode] = useState("");
+  const [system, setSystem] = useState("windows"); // Default to Windows
   const editor = useRef();
 
   const { setContainer } = useCodeMirror({
@@ -12,7 +13,7 @@ const CodeInput = ({ onVisualize }) => {
     extensions: [javascript()],
     theme: oneDark,
     value: code,
-    height: "auto",
+    height: "400px",
     onChange: (value) => {
       setCode(value);
     },
@@ -35,7 +36,7 @@ const CodeInput = ({ onVisualize }) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ code }), // Send only the code
+      body: JSON.stringify({ code, system }), // Send code and system
     })
       .then((response) => {
         if (!response.ok) {
@@ -64,11 +65,56 @@ const CodeInput = ({ onVisualize }) => {
       });
   };
 
+  const handleSystemChange = (event) => {
+    setSystem(event.target.value);
+  };
+
   return (
     <div className="container mt-4">
-      <h2 className="mb-4 text-center code-input-heading">Code Input</h2>
+      <h2 className="mb-4 text-center">Code Input</h2>
       <div className="code-editor-container" ref={editor}></div>
-      <div className="visualize-button-container d-flex justify-content-end mt-3">
+      <div className="d-flex align-items-center justify-content-between mt-3">
+  <div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="radio"
+        name="system"
+        id="windows"
+        value="windows"
+        checked={system === "windows"}
+        onChange={handleSystemChange}
+        style={{ width: "24px", height: "24px", cursor: "pointer" }}
+      />
+      <label
+        className="form-check-label"
+        htmlFor="windows"
+        style={{ fontSize: "1.5rem", marginLeft: "8px", cursor: "pointer", userSelect: "none" }}
+      >
+        Windows
+      </label>
+    </div>
+    <div className="form-check form-check-inline">
+      <input
+        className="form-check-input"
+        type="radio"
+        name="system"
+        id="mac"
+        value="mac"
+        checked={system === "mac"}
+        onChange={handleSystemChange}
+        style={{ width: "24px", height: "24px", cursor: "pointer" }}
+      />
+      <label
+        className="form-check-label"
+        htmlFor="mac"
+        style={{ fontSize: "1.5rem", marginLeft: "8px", cursor: "pointer", userSelect: "none" }}
+      >
+        Mac
+      </label>
+    </div>
+  </div>
+
   <button onClick={handleVisualize} className="btn btn-primary visualize-button">
     Visualize
   </button>

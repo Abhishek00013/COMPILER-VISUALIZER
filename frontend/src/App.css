@@ -1,14 +1,27 @@
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: rgb(156, 192, 212) !important;
+}
 .App {
   text-align: center;
+  background-color: rgb(156, 192, 212) !important;
+  min-height: 100vh;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-body {
-  background-color: rgb(156, 192, 212) !important;
-}
+
 .navbar {
   background-color: rgb(31, 79, 107) !important;
   height: 70px !important;
@@ -151,20 +164,17 @@ h2 {
   font-weight: bold !important;
   color: black !important;
 }
-
 .visualize-button {
-  margin-top: -40px !important;
-  margin-right: 20px !important;
   color: black !important;
   font-weight: bold !important;
   background-color: #007bff !important;
   border: none !important;
-  padding: 14px 32px !important;
+  padding: 20px 24px !important;
   border-radius: 6px !important;
   font-size: 18px !important;
   transition: background-color 0.3s ease !important;
+  cursor: pointer !important;
 }
-
 .visualize-button:hover {
   background-color: #0056b3 !important;
 }
@@ -173,12 +183,28 @@ h2 {
   font-weight: bold !important;
   background-color: #007bff !important;
   border: none !important;
-  padding: 10px 24px !important;
+  padding: 20px 30px !important;
   border-radius: 6px !important;
-  font-size: 16px !important;
+  font-size: 20px !important;
   transition: background-color 0.3s ease !important;
 }
 
 .btn-primary:hover {
   background-color: #0056b3 !important;
+}
+
+/* Increase size of radio buttons */
+.form-check-input {
+  width: 24px; /* default is usually 16px */
+  height: 24px;
+  cursor: pointer;
+  accent-color: #0d6efd; /* optional: change radio color */
+}
+
+/* Increase font size of the label */
+.form-check-label {
+  font-size: 1.5rem; /* adjust to desired size */
+  margin-left: 8px; /* spacing between radio and label */
+  cursor: pointer;
+  user-select: none;
 }
