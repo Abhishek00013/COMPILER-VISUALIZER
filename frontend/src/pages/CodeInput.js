@@ -66,13 +66,14 @@ const CodeInput = ({ onVisualize }) => {
 
   return (
     <div className="container mt-4">
-      <h2 className="mb-4 text-center">Code Input</h2>
+      <h2 className="mb-4 text-center code-input-heading">Code Input</h2>
       <div className="code-editor-container" ref={editor}></div>
-      <div className="d-flex justify-content-end mt-3">
-        <button onClick={handleVisualize} className="btn btn-primary">
-          Visualize
-        </button>
-      </div>
+      <div className="visualize-button-container d-flex justify-content-end mt-3">
+  <button onClick={handleVisualize} className="btn btn-primary visualize-button">
+    Visualize
+  </button>
+</div>
+
     </div>
   );
 };
