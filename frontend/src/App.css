@@ -44,10 +44,22 @@
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 4px;
-  overflow: auto;
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+  overflow-y: auto; /* Optional: allows vertical scroll if needed */
+  padding: 10px;
 }
+
 .code-editor-container .cm-editor {
-  height: 1500px !important;
+  height: auto !important;
+}
+
+.code-editor-container .cm-scroller {
+  overflow-x: hidden !important;
+}
+
+.code-editor-container .cm-content {
+  white-space: pre-wrap !important;
+  word-break: break-word;
 }
 
 @media (prefers-reduced-motion: no-preference) {
