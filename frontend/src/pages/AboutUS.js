@@ -8,18 +8,18 @@ const AboutUS = () => {
     <div className="container mt-4">
       <h2>About Us</h2>
       <p>
-        Welcome to the Mini Compiler project! This application is designed to
-        simulate the various phases of a compiler, including lexical analysis,
-        syntax analysis, intermediate code generation, code optimization, and
-        tagret code geneation.
+        Welcome to the Mini Compiler Visualizer - an interactive educational tool designed to simulate the inner workings of a compiler. This project walks you through key phases of compilation such as:
+        Lexical Analysis
+        Syntax Analysis
+        Intermediate Code Generation
+        Code Optimization
+        Target Code Generation
       </p>
       <p>
-        Our goal is to provide an educational tool for students and developers
-        to understand how compilers work under the hood.
+        Our mission is to make compiler concepts more accessible and intuitive for students, educators, and curious developers alike. Whether you're just starting out or brushing up on core computer science principles, this application provides a hands-on way to explore how compilers process and transform code.
       </p>
       <p>
-        Feel free to explore the application, input your code, and visualize the
-        different phases of compilation.
+        Feel free to contact us. You can contact us through the form on our Contact Us page.
       </p>
 
       <h3 className="mt-5">Contributors</h3>

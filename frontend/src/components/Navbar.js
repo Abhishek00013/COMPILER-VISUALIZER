@@ -16,14 +16,19 @@ const Navbar = () => {
                 Code Input
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item shifted-right">
               <Link className="nav-link" to="/compiler-phases">
                 Compiler Phases
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item shifted-right">
               <Link className="nav-link" to="/about">
                 About Us
+              </Link>
+            </li>
+            <li className="nav-item shifted-right">
+              <Link className="nav-link" to="/contact">
+              Contact Us
               </Link>
             </li>
           </ul>

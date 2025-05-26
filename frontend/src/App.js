@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import CodeInput from "./pages/CodeInput";
 import CompilerPhases from "./pages/CompilerPhases";
 import AboutUS from "./pages/AboutUS";
+import Contact from "./pages/Contact";
 import "./App.css";
 import 'normalize.css';
 function App() {
@@ -28,6 +29,7 @@ function App() {
           element={<CompilerPhases outputs={outputs} />}
         />
         <Route path="/about" element={<AboutUS />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   );

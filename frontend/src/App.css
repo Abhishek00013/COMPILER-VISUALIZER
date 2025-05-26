@@ -52,19 +52,23 @@ body {
 .navbar-nav .nav-link {
   font-size: 1.5rem !important;
   color: black !important;
-  margin-left: 20px;
+  margin-left: 5px !important;
 }
 
 .nav-link:hover {
-  color: #f0db4f !important; /* yellow on hover */
+  color: #f0db4f !important;
 }
+.shifted-right {
+  margin-left: 10px !important;
+}
+
 .code-editor-container {
   max-width: 700px;
   margin: 0 auto;
   border: 1px solid #ccc;
   border-radius: 4px;
-  overflow-x: hidden; /* Prevent horizontal scrollbar */
-  overflow-y: auto; /* Optional: allows vertical scroll if needed */
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 10px;
 }
 
@@ -237,4 +241,43 @@ h2 {
   word-wrap: break-word !important;
   overflow-x: visible !important;
   max-height: 100% !important;
+}
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.contact-card {
+  background-color: #ffffff;
+  padding: 40px 40px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: left;
+}
+
+.contact-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contact-card p {
+  font-size: 24px;
+  color: #444;
+  margin: 12px 0;
+}
+
+.contact-card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
 }
