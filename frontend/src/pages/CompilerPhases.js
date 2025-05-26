@@ -27,6 +27,7 @@ const CompilerPhases = ({ outputs }) => {
   return (
     <div className="container mt-4 text-center">
       <h2>Compiler Phases</h2>
+      
       <div className="flashcard-container">
         {outputs.map((output, index) => (
           <div
